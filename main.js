@@ -5,6 +5,7 @@ async function main() {
     const token = core.getInput('github-token', { required: false }) || process.env.GITHUB_TOKEN;
     const state = (core.getInput('state', { required: false }) || 'open').toLowerCase();
     const sha = core.getInput('sha', { required: true });
+    const bla = 1;
 
     const octokit = github.getOctokit(token);
     const context = github.context;
@@ -16,7 +17,7 @@ async function main() {
 
     const prs = result.data.filter((el) => state === 'all' || el.state === state);
     const pr = prs[0];
-
+    
     core.info(`Setting output: pr: ${(pr && pr.number) || ''}`);
     core.setOutput('pr', (pr && pr.number) || '');
     core.info(`Setting output: number: ${(pr && pr.number) || ''}`);
